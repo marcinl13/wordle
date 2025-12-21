@@ -1,7 +1,7 @@
-'use client';
-import GuessInput from '@/components/GuessInput';
-import GuessRow from '@/components/GuessRow';
-import { Activity, useState } from 'react';
+"use client";
+import GuessInput from "@/components/GuessInput";
+import GuessRow from "@/components/GuessRow";
+import { Activity, useState } from "react";
 
 export function Game({ dailyWord }: { dailyWord: string }) {
   const [guesses, setGuesses] = useState<string[]>([]);
@@ -15,7 +15,7 @@ export function Game({ dailyWord }: { dailyWord: string }) {
         ))}
       </div>
 
-      <Activity mode={!won ? 'visible' : 'hidden'}>
+      <Activity mode={!won ? "visible" : "hidden"}>
         <GuessInput
           onSubmit={(guess) => {
             const newGuesses = [...guesses, guess.toLowerCase()];
@@ -26,7 +26,7 @@ export function Game({ dailyWord }: { dailyWord: string }) {
         />
       </Activity>
 
-      <Activity mode={won ? 'visible' : 'hidden'}>
+      <Activity mode={won ? "visible" : "hidden"}>
         <p className="text-center mt-4 text-green-400 text-xl">
           🎉 You guessed the word!
         </p>

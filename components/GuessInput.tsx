@@ -3,7 +3,7 @@ import { useState } from "react";
 type Props = {
   onSubmit: (guess: string) => void;
   maxLength?: number;
-}
+};
 
 export default function GuessInput({ onSubmit, maxLength = 5 }: Props) {
   const [input, setInput] = useState("");

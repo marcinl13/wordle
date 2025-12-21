@@ -14,7 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Daily Word — Daily Word Puzzle",
-  description: "A daily five-letter word puzzle that's quick, accessible, and privacy-first.",
+  description:
+    "A daily five-letter word puzzle that's quick, accessible, and privacy-first.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
