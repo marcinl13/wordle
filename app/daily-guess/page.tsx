@@ -7,13 +7,13 @@ export default async function Home({
   searchParams,
 }: PageProps<"/daily-guess">) {
   const difficulty = getDifficultyFromSearchParams(await searchParams);
-  const word = getDailyWord(difficulty);
+  const dailyWord = getDailyWord(difficulty);
 
   return (
     <main className="container">
       <h1 className="text-4xl font-bold text-center">Daily Word Guess</h1>
 
-      <Game dailyWord={word} difficulty={difficulty} />
+      <Game dailyWord={dailyWord} difficulty={difficulty} />
     </main>
   );
 }

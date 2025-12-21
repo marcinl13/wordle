@@ -1,9 +1,9 @@
-import { TileStatus } from "@/lib/evaluateStatus";
+import { LetterState } from "@/lib/evaluateGuess";
 import clsx from "clsx";
 
 type Props = {
   letter: string;
-  status: TileStatus;
+  status: LetterState;
 };
 
 export default function GuessTile({ letter, status }: Props) {

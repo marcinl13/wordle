@@ -1,4 +1,4 @@
-import { evaluateStatus } from "@/lib/evaluateStatus";
+import { evaluateGuess } from "@/lib/evaluateGuess";
 import GuessTile from "./GuessTile";
 
 type Props = {
@@ -7,12 +7,11 @@ type Props = {
 };
 
 export default function GuessRow({ guess = "", dailyWord }: Props) {
-  const tiles = Array.from({ length: dailyWord.length }).map((_, i) => {
-    const letter = guess[i] || "";
-    const status = evaluateStatus(guess, dailyWord, i);
+  const evaluated = evaluateGuess(guess, dailyWord);
 
-    return <GuessTile key={i} letter={letter} status={status} />;
-  });
+  const tiles = evaluated.map(({ letter, state }, i) => (
+    <GuessTile key={i} letter={letter} status={state} />
+  ));
 
   return <div className="flex gap-2">{tiles}</div>;
 }
