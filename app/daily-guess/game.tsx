@@ -1,7 +1,7 @@
 "use client";
 import GuessInput from "@/components/GuessInput";
 import GuessRow from "@/components/GuessRow";
-import type { Difficulty } from "@/lib/getDifficultyFromSearchParams";
+import type { Difficulty } from "@/const/difficulty";
 import { Activity, useState } from "react";
 
 const CHANCES: Record<Difficulty, number> = {

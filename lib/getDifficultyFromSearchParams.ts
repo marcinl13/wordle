@@ -1,4 +1,4 @@
-export type Difficulty = "normal" | "hard";
+import type { Difficulty } from "@/const/difficulty";
 
 type SearchParams = Record<string, string | string[] | undefined>;
 
