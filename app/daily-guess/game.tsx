@@ -3,6 +3,7 @@ import GuessInput from "@/components/GuessInput";
 import GuessRow from "@/components/GuessRow";
 import { CHANCES } from "@/const/chances";
 import type { Difficulty } from "@/const/difficulty";
+import useDailyGuesses from "@/hooks/useDailyGuesses";
 import { Activity, useState } from "react";
 
 export function Game({
@@ -12,8 +13,10 @@ export function Game({
   dailyWord: string;
   difficulty: Difficulty;
 }) {
-  const [guesses, setGuesses] = useState<string[]>([]);
   const [won, setWon] = useState(false);
+  const { guesses, addGuess } = useDailyGuesses(difficulty, {
+    encrypt: true,
+  });
 
   return (
     <>
@@ -27,10 +30,10 @@ export function Game({
         <GuessInput
           maxLength={dailyWord.length}
           onSubmit={(guess) => {
-            const newGuesses = [...guesses, guess.toLowerCase()];
-            setGuesses(newGuesses);
+            const lower = guess.toLowerCase();
+            addGuess(lower);
 
-            if (guess.toLowerCase() === dailyWord) setWon(true);
+            if (lower === dailyWord) setWon(true);
           }}
         />
       </Activity>
