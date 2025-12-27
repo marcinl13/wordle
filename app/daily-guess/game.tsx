@@ -1,13 +1,9 @@
 "use client";
 import GuessInput from "@/components/GuessInput";
 import GuessRow from "@/components/GuessRow";
+import { CHANCES } from "@/const/chances";
 import type { Difficulty } from "@/const/difficulty";
 import { Activity, useState } from "react";
-
-const CHANCES: Record<Difficulty, number> = {
-  normal: 6,
-  hard: 7,
-};
 
 export function Game({
   dailyWord,
