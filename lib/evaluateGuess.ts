@@ -1,8 +1,8 @@
-export type LetterState = "correct" | "present" | "absent" | "empty";
+import type { LetterStatus } from "@/const/letterStatus";
 
 type EvaluatedLetter = {
   letter: string;
-  state: LetterState;
+  state: LetterStatus;
 };
 
 /**

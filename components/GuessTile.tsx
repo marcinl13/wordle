@@ -1,9 +1,9 @@
-import { LetterState } from "@/lib/evaluateGuess";
+import type { LetterStatus } from "@/const/letterStatus";
 import clsx from "clsx";
 
 type Props = {
   letter: string;
-  status: LetterState;
+  status: LetterStatus;
 };
 
 export default function GuessTile({ letter, status }: Props) {
