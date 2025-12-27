@@ -14,9 +14,7 @@ export function Game({
   difficulty: Difficulty;
 }) {
   const [won, setWon] = useState(false);
-  const { guesses, addGuess } = useDailyGuesses(difficulty, {
-    encrypt: true,
-  });
+  const { guesses, addGuess } = useDailyGuesses(difficulty);
 
   return (
     <>
