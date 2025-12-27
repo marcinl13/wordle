@@ -3,7 +3,7 @@ import { Game } from "./game";
 import { getDailyWord } from "@/lib/dailyWord";
 import { getDifficultyFromSearchParams } from "@/lib/getDifficultyFromSearchParams";
 
-export default async function Home({
+export default async function Page({
   searchParams,
 }: PageProps<"/daily-guess">) {
   const difficulty = getDifficultyFromSearchParams(await searchParams);
@@ -11,10 +11,14 @@ export default async function Home({
 
   return (
     <main className="container">
-      <h1 className="text-4xl font-bold text-center">Daily Word Guess</h1>
-      <h2 className="text-2xl font-bold text-center text-orange-400 uppercase">
-        {difficulty}
-      </h2>
+      <header className="text-center font-bold">
+        <h1 className="text-4xl">Daily Word Guess</h1>
+        <h2 className="text-2xl text-orange-400 uppercase">{difficulty}</h2>
+      </header>
+
+      {process.env.NODE_ENV === "development" && (
+        <p className="text-center">{dailyWord}</p>
+      )}
 
       <Game dailyWord={dailyWord} difficulty={difficulty} />
     </main>
