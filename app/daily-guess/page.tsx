@@ -7,7 +7,7 @@ export default async function Page({
   searchParams,
 }: PageProps<"/daily-guess">) {
   const difficulty = getDifficultyFromSearchParams(await searchParams);
-  const dailyWord = getDailyWord(difficulty);
+  const dailyWord = await getDailyWord(difficulty);
 
   return (
     <main className="container">

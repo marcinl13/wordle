@@ -1,11 +1,14 @@
 import "server-only";
-import normalData from "@/data/en/normal.json";
-import hardData from "@/data/en/hard.json";
 import type { Difficulty } from "@/const/difficulty";
 
-export function getDailyWord(difficulty: Difficulty) {
+const dataLoaders: Record<Difficulty, () => Promise<{ words: string[] }>> = {
+  normal: () => import("@/data/en/normal.json").then((m) => m.default),
+  hard: () => import("@/data/en/hard.json").then((m) => m.default),
+};
+
+export async function getDailyWord(difficulty: Difficulty) {
   const dayIndex = Math.floor(Date.now() / 1000 / 60 / 60 / 24);
-  const words = difficulty === "hard" ? hardData.words : normalData.words;
+  const { words } = await dataLoaders[difficulty]();
 
   return words[dayIndex % words.length];
 }
