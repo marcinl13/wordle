@@ -6,8 +6,12 @@ const dataLoaders: Record<Difficulty, () => Promise<{ words: string[] }>> = {
   hard: () => import("@/data/en/hard.json").then((m) => m.default),
 };
 
+function getUtcDayIndex(date: Date = new Date()): number {
+  return Math.floor(date.getTime() / 86_400_000);
+}
+
 export async function getDailyWord(difficulty: Difficulty) {
-  const dayIndex = Math.floor(Date.now() / 1000 / 60 / 60 / 24);
+  const dayIndex = getUtcDayIndex();
   const { words } = await dataLoaders[difficulty]();
 
   return words[dayIndex % words.length];
