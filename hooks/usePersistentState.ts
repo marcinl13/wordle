@@ -1,5 +1,5 @@
+import { CryptoSealer } from "@/lib/seal/CryptoSealer";
 import { useCallback, useEffect, useRef, useState } from "react";
-import Iron from "@hapi/iron";
 
 type Options<T> = {
   serialize?: (v: T) => string;
@@ -8,33 +8,9 @@ type Options<T> = {
   secret?: string;
 };
 
-async function tryUnseal(raw: string, secret?: string) {
-  if (!secret) return JSON.parse(raw);
-  try {
-    return await Iron.unseal(raw, secret, Iron.defaults);
-  } catch (e) {
-    // fallback to plain JSON if unsealing fails
-    try {
-      return JSON.parse(raw);
-    } catch {
-      return undefined;
-    }
-  }
-}
-
-async function trySeal(value: unknown, secret?: string) {
-  if (!secret) return JSON.stringify(value);
-  try {
-    return await Iron.seal(value, secret, Iron.defaults);
-  } catch (e) {
-    // fallback to plain JSON on error
-    return JSON.stringify(value);
-  }
-}
-
 /**
  * A generic persistent state hook backed by localStorage.
- * - supports optional `@hapi/iron` sealing if `encrypt` and `secret` are provided
+ * - supports optional sealing if `encrypt` and `secret` are provided
  */
 export default function usePersistentState<T>(
   key: string,
@@ -61,7 +37,7 @@ export default function usePersistentState<T>(
         const raw = localStorage.getItem(key);
         if (raw != null) {
           const value = encrypt
-            ? await tryUnseal(raw, secret)
+            ? await CryptoSealer.tryUnseal(raw, secret)
             : deserialize(raw);
           if (!cancelled && value !== undefined) setState(value as T);
         }
@@ -85,7 +61,7 @@ export default function usePersistentState<T>(
         (async () => {
           try {
             const toSet = encrypt
-              ? await trySeal(value, secret)
+              ? await CryptoSealer.trySeal(value, secret)
               : serialize(value);
             localStorage.setItem(key, toSet);
           } catch {
