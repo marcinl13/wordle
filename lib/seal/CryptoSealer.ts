@@ -32,7 +32,6 @@ async function deriveKey(secret: string) {
   );
 }
 
-
 export const CryptoSealer = {
   async trySeal(value: unknown, secret?: string) {
     const raw = JSON.stringify(value);

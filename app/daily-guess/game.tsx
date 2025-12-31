@@ -3,8 +3,9 @@ import GuessInput from "@/components/GuessInput";
 import GuessRow from "@/components/GuessRow";
 import { CHANCES } from "@/const/chances";
 import type { Difficulty } from "@/const/difficulty";
+import { GameStates } from "@/const/gameState";
 import useDailyGuesses from "@/hooks/useDailyGuesses";
-import { Activity, useState } from "react";
+import { Activity } from "react";
 
 export function Game({
   dailyWord,
@@ -13,8 +14,7 @@ export function Game({
   dailyWord: string;
   difficulty: Difficulty;
 }) {
-  const [won, setWon] = useState(false);
-  const { guesses, addGuess } = useDailyGuesses(difficulty);
+  const { guesses, addGuess, state } = useDailyGuesses(difficulty, dailyWord);
 
   return (
     <>
@@ -24,21 +24,22 @@ export function Game({
         ))}
       </div>
 
-      <Activity mode={!won ? "visible" : "hidden"}>
+      <Activity mode={state === GameStates.PLAYING ? "visible" : "hidden"}>
         <GuessInput
           maxLength={dailyWord.length}
-          onSubmit={(guess) => {
-            const lower = guess.toLowerCase();
-            addGuess(lower);
-
-            if (lower === dailyWord) setWon(true);
-          }}
+          onSubmit={(guess) => addGuess(guess.toLowerCase())}
         />
       </Activity>
 
-      <Activity mode={won ? "visible" : "hidden"}>
+      <Activity mode={state === GameStates.WON ? "visible" : "hidden"}>
         <p className="text-center mt-4 text-green-400 text-xl">
           🎉 You guessed the word!
+        </p>
+      </Activity>
+
+      <Activity mode={state === GameStates.LOST ? "visible" : "hidden"}>
+        <p className="text-center mt-4 text-red-400 text-xl">
+          😢 You ran out of guesses — the word was <strong>{dailyWord}</strong>
         </p>
       </Activity>
     </>
