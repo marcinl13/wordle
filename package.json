@@ -10,7 +10,6 @@
     "format": "biome format --write"
   },
   "dependencies": {
-    "@hapi/iron": "^7.0.1",
     "clsx": "^2.1.1",
     "js-cookie": "^3.0.5",
     "next": "16.0.10",
