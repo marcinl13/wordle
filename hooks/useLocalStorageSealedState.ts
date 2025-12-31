@@ -16,8 +16,11 @@ export default function useLocalStorageSealedState<T>(
   initial: T | (() => T),
   options?: Options<T>,
 ) {
-  const { serialize = JSON.stringify, deserialize = JSON.parse, secret } =
-    options || {};
+  const {
+    serialize = JSON.stringify,
+    deserialize = JSON.parse,
+    secret,
+  } = options || {};
 
   const [state, setState] = useState<T>(() =>
     typeof initial === "function" ? (initial as () => T)() : initial,

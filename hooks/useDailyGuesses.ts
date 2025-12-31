@@ -1,32 +1,29 @@
 import { useCallback } from "react";
-import usePersistentState from "@/hooks/usePersistentState";
+import useCookieSealedState from "@/hooks/useCookieSealedState";
 import type { Difficulty } from "@/const/difficulty";
+import { STORAGE_KEY } from "@/const/cookies";
 
-/**
- * Persist daily guesses in localStorage per word/day.
- *
- * By default this uses plain localStorage, but you can enable sealing with
- * `@hapi/iron` by providing the `encrypt` option and a `secret` (e.g.
- * `process.env.NEXT_PUBLIC_DAILY_GUESS_SECRET`).
- */
-export default function useDailyGuesses(
-  difficulty: Difficulty,
-  options?: {
-    encrypt?: boolean;
-    secret?: string;
-  },
-) {
-  const STORAGE_KEY = `daily-guess:guesses:${difficulty}`;
-  const [guesses, setGuesses, resetGuesses] = usePersistentState<string[]>(
-    STORAGE_KEY,
+export default function useDailyGuesses(difficulty: Difficulty) {
+  const cookieExpireAtNextUtcMidnight = (() => {
+    const now = new Date();
+    return new Date(
+      Date.UTC(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDate() + 1,
+        0,
+        0,
+        0,
+      ),
+    );
+  })();
+
+  const [guesses, setGuesses, resetGuesses] = useCookieSealedState<string[]>(
+    STORAGE_KEY[difficulty],
     [],
     {
-      encrypt: options?.encrypt ?? false,
-      secret:
-        options?.secret ??
-        (process.env.NEXT_PUBLIC_DAILY_GUESS_SECRET as string | undefined),
-      useCookies: true,
-      cookieExpireAtNextUtcMidnight: true,
+      secret: process.env.NEXT_PUBLIC_DAILY_GUESS_SECRET as string | undefined,
+      cookieOptions: { expires: cookieExpireAtNextUtcMidnight },
     },
   );
 

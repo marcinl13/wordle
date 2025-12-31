@@ -6,7 +6,7 @@ type Options<T> = {
   serialize?: (v: T) => string;
   deserialize?: (s: string) => T;
   secret?: string;
-  cookieOptions?: typeof Cookies['attributes'];
+  cookieOptions?: (typeof Cookies)["attributes"];
 };
 
 /**
