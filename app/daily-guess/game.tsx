@@ -1,11 +1,11 @@
 "use client";
+import { Activity } from "react";
 import GuessInput from "@/components/GuessInput";
 import GuessRow from "@/components/GuessRow";
 import { CHANCES } from "@/const/chances";
 import type { Difficulty } from "@/const/difficulty";
 import { GameStates } from "@/const/gameState";
 import useDailyGuesses from "@/hooks/useDailyGuesses";
-import { Activity } from "react";
 
 export function Game({
   dailyWord,

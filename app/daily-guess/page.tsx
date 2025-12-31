@@ -1,7 +1,7 @@
 import "server-only";
-import { Game } from "./game";
 import { getDailyWord } from "@/lib/dailyWord";
 import { getDifficultyFromSearchParams } from "@/lib/getDifficultyFromSearchParams";
+import { Game } from "./game";
 
 export default async function Page({
   searchParams,

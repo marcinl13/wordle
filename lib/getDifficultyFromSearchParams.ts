@@ -7,8 +7,8 @@ export function getDifficultyFromSearchParams(
 ): Difficulty {
   if (!params) return "normal";
 
-  if (params.hasOwnProperty("difficulty")) {
-    const difficulty = params["difficulty"];
+  if (Object.hasOwn(params, "difficulty")) {
+    const difficulty = params.difficulty;
 
     if (difficulty === "hard") return "hard";
 

@@ -1,9 +1,9 @@
 import { useCallback, useMemo } from "react";
-import useCookieSealedState from "@/hooks/useCookieSealedState";
 import { CHANCES } from "@/const/chances";
-import type { Difficulty } from "@/const/difficulty";
 import { STORAGE_KEY } from "@/const/cookies";
+import type { Difficulty } from "@/const/difficulty";
 import type { GameState } from "@/const/gameState";
+import useCookieSealedState from "@/hooks/useCookieSealedState";
 
 export default function useDailyGuesses(
   difficulty: Difficulty,

@@ -1,5 +1,5 @@
-import type { LetterStatus } from "@/const/letterStatus";
 import clsx from "clsx";
+import type { LetterStatus } from "@/const/letterStatus";
 
 type Props = {
   letter: string;

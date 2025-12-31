@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
-import { CryptoSealer } from "@/lib/seal/CryptoSealer";
 import { useCallback, useEffect, useState } from "react";
+import { CryptoSealer } from "@/lib/seal/CryptoSealer";
 
 type Options<T> = {
   serialize?: (v: T) => string;
