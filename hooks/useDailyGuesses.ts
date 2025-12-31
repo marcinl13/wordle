@@ -25,6 +25,8 @@ export default function useDailyGuesses(
       secret:
         options?.secret ??
         (process.env.NEXT_PUBLIC_DAILY_GUESS_SECRET as string | undefined),
+      useCookies: true,
+      cookieExpireAtNextUtcMidnight: true,
     },
   );
 
