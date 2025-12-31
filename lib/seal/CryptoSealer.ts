@@ -1,3 +1,5 @@
+import { Base64 } from "./Base64";
+
 const textEncoder = new TextEncoder();
 const textDecoder = new TextDecoder();
 
@@ -30,13 +32,6 @@ async function deriveKey(secret: string) {
   );
 }
 
-function base64Encode(bytes: Uint8Array) {
-  return btoa(String.fromCharCode(...bytes));
-}
-
-function base64Decode(str: string) {
-  return Uint8Array.from(atob(str), (c) => c.charCodeAt(0));
-}
 
 export const CryptoSealer = {
   async trySeal(value: unknown, secret?: string) {
@@ -55,8 +50,8 @@ export const CryptoSealer = {
       );
 
       return JSON.stringify({
-        iv: base64Encode(iv),
-        data: base64Encode(new Uint8Array(encrypted)),
+        iv: Base64.encode(iv),
+        data: Base64.encode(new Uint8Array(encrypted)),
       });
     } catch {
       return raw;
@@ -77,8 +72,8 @@ export const CryptoSealer = {
       if (!parsed?.iv || !parsed?.data) throw new Error();
 
       const key = await deriveKey(secret);
-      const iv = base64Decode(parsed.iv);
-      const data = base64Decode(parsed.data);
+      const iv = Base64.decode(parsed.iv);
+      const data = Base64.decode(parsed.data);
 
       const decrypted = await crypto.subtle.decrypt(
         { name: CIPHER_ALGORITHM, iv },
