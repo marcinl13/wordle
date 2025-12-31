@@ -1,5 +1,10 @@
 Wordle is a crisp, delightful daily word puzzle that sharpens your vocabulary and gives you a quick, satisfying brain break. Clean UI, accessible controls, and lightweight performance make it perfect for a short burst of daily.
 
+## Screenshots
+
+<img width="1025" height="715" alt="image" src="https://github.com/user-attachments/assets/3dc8ddca-f03e-4f77-b9f8-4a786eab269c" />
+
+
 ## Key features & benefits ✅
 
 - **Daily curated puzzle** — one fresh challenge every day to keep you coming back
